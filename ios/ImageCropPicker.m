@@ -305,7 +305,7 @@ RCT_REMAP_METHOD(clean,
     AVAuthorizationStatus authStatus = [AVCaptureDevice authorizationStatusForMediaType:AVMediaTypeVideo];
     if (authStatus == AVAuthorizationStatusRestricted || authStatus == AVAuthorizationStatusDenied) {
         // 无相机权限 做一个友好的提示
-        UIAlertView * alert = [[UIAlertView alloc]initWithTitle:@"无法使用相机" message:@"请在iPhone的""设置-隐私-相机""中允许访问相机" delegate:self cancelButtonTitle:@"取消" otherButtonTitles:@"设置", nil];
+        UIAlertView * alert = [[UIAlertView alloc]initWithTitle:@"Cannot use camera" message:@"Please allow access to the camera in ""Settings-Privacy-Camera"" of the iPhone" delegate:self cancelButtonTitle:@"Cancel" otherButtonTitles:@"Set up", nil];
         [alert show];
     } else if (authStatus == AVAuthorizationStatusNotDetermined) {
         // fix issue 466, 防止用户首次拍照拒绝授权时相机页黑屏
@@ -318,7 +318,7 @@ RCT_REMAP_METHOD(clean,
         }];
         // 拍照之前还需要检查相册权限
     } else if ([PHPhotoLibrary authorizationStatus] == 2) { // 已被拒绝，没有相册权限，将无法保存拍的照片
-        UIAlertView * alert = [[UIAlertView alloc]initWithTitle:@"无法访问相册" message:@"请在iPhone的""设置-隐私-相册""中允许访问相册" delegate:self cancelButtonTitle:@"取消" otherButtonTitles:@"设置", nil];
+        UIAlertView * alert = [[UIAlertView alloc]initWithTitle:@"Cannot access album" message:@"Please allow access to the album in ""Settings-Privacy-Album"" of the iPhone" delegate:self cancelButtonTitle:@"Cancel" otherButtonTitles:@"Set up", nil];
         [alert show];
     } else if ([PHPhotoLibrary authorizationStatus] == 0) { // 未请求过相册权限
         [[TZImageManager manager] requestAuthorizationWithCompletion:^{
